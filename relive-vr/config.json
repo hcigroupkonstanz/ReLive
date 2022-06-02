@@ -1,0 +1,8 @@
+{
+    "RestPort": 55210,
+    "UnityPort": 55212,
+    "Protocol": "http://",
+    "ServerAddress": "localhost",
+    "EnableRenderstreaming": true,
+    "EnableSync": true
+}

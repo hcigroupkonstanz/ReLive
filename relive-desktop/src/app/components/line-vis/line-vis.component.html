@@ -1,0 +1,70 @@
+<div class="container">
+    <div id="vis" #visContainer></div>
+    <div id="stats">
+        <h2>Metrics</h2>
+        <ng-scrollbar>
+            <div class="stat-entry" *ngIf="stats['total']">
+                <h3 class="stat-title">Total</h3>
+                <div class="stat-container">
+                    <table>
+                        <tr>
+                            <td class="stat-name">SD</td>
+                            <td class="stat-value">{{ stats['total']['sd'] | number : '1.3-3' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="stat-name">Mean</td>
+                            <td class="stat-value">{{ stats['total']['mean'] | number : '1.3-3' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="stat-name">Median</td>
+                            <td class="stat-value">{{ stats['total']['median'] | number : '1.3-3' }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="stat-entry" *ngFor="let instance of tool.instances">
+                <h3 class="stat-title">
+                    <div class="session-color" [ngStyle]="{ background: instance.color }"></div>
+                    <span>{{ instance.session.name }}</span>
+                </h3>
+                <div class="stat-container">
+                    <table *ngIf="stats[instance.session.sessionId]?.type === 'number'">
+                        <tr>
+                            <td class="stat-name">SD</td>
+                            <td class="stat-value">{{ stats[instance.session.sessionId]['sd'] | number : '1.3-3' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="stat-name">Mean</td>
+                            <td class="stat-value">{{ stats[instance.session.sessionId]['mean'] | number : '1.3-3' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="stat-name">Median</td>
+                            <td class="stat-value">{{ stats[instance.session.sessionId]['median'] | number : '1.3-3' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="stat-name">Current Value</td>
+                            <td class="stat-value">{{ stats[instance.session.sessionId]['current'] }}</td>
+                        </tr>
+                    </table>
+                    <table *ngIf="stats[instance.session.sessionId]?.type === 'string'">
+                        <tr>
+                            <td class="stat-name">Current Value</td>
+                            <td class="stat-value">{{ stats[instance.session.sessionId]['current'] }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </ng-scrollbar>
+    </div>
+    <div id="error-container" *ngIf="hasErrors">
+        <mat-icon id="error-icon">warning</mat-icon>
+        <div id="errors">
+            Could not process data correctly:
+            <div class="error" *ngFor='let error of errors | keyvalue'>
+                <b>{{ error.key }}:</b>
+                {{ error.value }}
+            </div>
+        </div>
+    </div>
+</div>

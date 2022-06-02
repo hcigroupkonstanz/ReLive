@@ -1,0 +1,186 @@
+@import "src/variables";
+
+#container {
+    display: grid;
+    grid-template-columns: [session-panel] 300px [tool-panel] auto [media-panel] 36%;
+
+    color: #363740;
+
+    background: $colBackground;
+    width: 100vw;
+    height: 100vh;
+}
+
+#study-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+
+    font-size: 24px;
+    font-weight: 500;
+
+    mat-icon {
+        margin-right: 10px;
+    }
+}
+
+.panel {
+    @include outline;
+    background: #fff;
+    margin: 5px;
+    overflow: hidden;
+
+    hr {
+        margin: 10px -20px;
+        border: 1px solid $colOutline;
+    }
+}
+
+#session-panel {
+    grid-row: content;
+    grid-column: session-panel;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px;
+
+    .header {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: bold;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-right: 20px;
+    }
+
+    .section {
+        margin-top: 30px;
+    }
+}
+
+.list-item {
+    font-size: 14px;
+
+    &.active {
+        .scene-indicator {
+            opacity: 1;
+        }
+    }
+
+    .scene-indicator {
+        opacity: 0;
+        transition: opacity $defaultTransition;
+        position: absolute;
+        right: 0;
+    }
+
+    .session-color {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        margin-left: 5px;
+        margin-right: 10px;
+    }
+}
+
+.list-item > div {
+    margin: 12px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .text {
+        margin-left: 8px;
+    }
+}
+
+#tool-panel {
+    position: relative;
+    grid-row: content;
+    grid-column: tool-panel;
+    padding: 10px 20px 0px 20px;
+
+    .header-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .header {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+
+            * {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .tool-container {
+        padding-right: 25px;
+        padding-bottom: 100px;
+    }
+
+    .tool {
+        @include outline;
+    }
+}
+
+#media-panel {
+    padding: 10px;
+
+    grid-row: content;
+    grid-column: media-panel;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#timeline-drag-handle {
+    grid-row: drag;
+    grid-column: 1 / span 3;
+    width: 100%;
+    height: 5px;
+    cursor: n-resize;
+
+
+    > #handle {
+        background: $colHighlight;
+        opacity: 0.5;
+        transition: opacity $defaultTransition;
+
+        width: 100%;
+        height: 2px;
+
+        &:hover {
+            opacity: 1;
+            height: 4px;
+        }
+    }
+}
+
+#timeline-container {
+    grid-row: timeline;
+    grid-column: 1 / span 3;
+}
+
+.icon-button {
+    background: transparent;
+    box-shadow: inherit;
+}
+
+.grabbable {
+    cursor: grab;
+}

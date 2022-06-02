@@ -1,0 +1,39 @@
+version: '3.5'
+
+networks:
+    stack:
+        external: false
+        name: stack
+
+services:
+    mongo:
+        image: mongo:4.2.8
+        restart: always
+        ports:
+            - 277:27017
+        volumes:
+            - ./db-data/:/data/db
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: CHANGE_THIS_MONGO_USER
+            MONGO_INITDB_ROOT_PASSWORD: CHANGE_THIS_MONGO_PASSWORD
+        networks:
+            - stack
+
+    relive:
+        build: .
+        restart: unless-stopped
+        ports:
+            - 55211:55211
+            - 55212:55212
+            - 55213:55213
+            - 55214:55214
+        volumes:
+            - ./persistent/:/srv/relive-server/persistent/
+        environment:
+            - 'MONGODB_URI="mongodb://CHANGE_THIS_MONGO_USER:CHANGE_THIS_MONGO_PASSWORD@mongo:277/admin?retryWrites=true"'
+            - 'PERSISTENT_FILE_PATH="./persistent/"'
+            - 'NOTEBOOK_NAME=My Notebook'
+            - 'SESSION_ID=X'
+            - 'STUDY_NAME=X'
+        networks:
+            - stack

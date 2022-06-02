@@ -4,9 +4,11 @@
 
 <p align="center">
     <strong>
-        Publication (coming soon)
+      <a href="https://dl.acm.org/doi/10.1145/3491102.3517550">Publication</a>
         •
-        Video (coming soon)
+      <a href="https://youtu.be/BaNZ02QkZ_k">Prototype Video</a>
+        •
+      <a href="https://youtu.be/As3i9rzliF4">Presentation</a>
     </strong>
 </p>
 
@@ -18,4 +20,10 @@ This is the code repository of the CHI'22 publication:
 
 For questions or feedback, please contact [Sebastian Hubenschmid](https://hci.uni-konstanz.de/personen/wissenschaftliche-mitarbeiterinnen/sebastian-hubenschmid/) ([GitHub](https://github.com/SebiH)), [Jonathan Wieland](https://hci.uni-konstanz.de/personen/wissenschaftliche-mitarbeiterinnen/jonathan-wieland/) ([GitHub](https://github.com/WielandJ)), or [Daniel Fink](https://hci.uni-konstanz.de/personen/wissenschaftliche-mitarbeiterinnen/daniel-fink/) ([GitHub](https://github.com/dunifi91)).
 
-**The code will be available soon**
+The repository contains code for the following applications:
+- **relive-desktop**: ReLive Desktop application for viewing MR studies on the desktop.
+- **relive-logging-toolkit**: Versatile Unity logging toolkit for capturing data from mixed reality studies.
+- **relive-server**: ReLive server that collects data from the toolkit and provides/synchronizes data between the ReLive-Desktop and ReLive-VR application.
+- **relive-vr**: ReLive Unity application for viewing MR studies in VR.
+
+For documentation, please see the individual project folders.

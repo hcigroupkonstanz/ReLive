@@ -1,0 +1,19 @@
+<div class="container">
+    <video #vid src="{{ source }}"></video>
+
+    <div class="chips">
+        <app-chip class="session-chip">{{ session.name }}</app-chip>
+        <app-chip class="origin-chip">{{ originName }}</app-chip>
+    </div>
+
+    <div class="status">
+        <div>
+            <mat-icon *ngIf="!canPlay" svgIcon="video-off"></mat-icon>
+        </div>
+    </div>
+
+    <button mat-mini-fab id="fullscreen-button" (click)="toggleFullscreen()" matTooltip="Toggle fullscreen">
+        <mat-icon [inline]="true" *ngIf="isFullscreen()">fullscreen_exit</mat-icon>
+        <mat-icon [inline]="true" *ngIf="!isFullscreen()">fullscreen</mat-icon>
+    </button>
+</div>

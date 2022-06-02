@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4508264320530266185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4508264320530266186}
+  - component: {fileID: 4508264320530266187}
+  m_Layer: 0
+  m_Name: DataPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4508264320530266186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4508264320530266185}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4508264320530266187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4508264320530266185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa059ae1ceb316438a491b9f4353629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultPrefab: {fileID: 2171317943964783677, guid: a7be79895f21a4181b8015bf4bdfb9fb,
+    type: 3}
+  IPadPrefab: {fileID: 7774202244424746434, guid: 7d18809c85c1e47929d1b620ee7a3d14,
+    type: 3}
+  HMDPrefab: {fileID: 1625939826533451978, guid: 79a7cef43912eb44cae1aefbe1dba736,
+    type: 3}
+  ControllerPrefab: {fileID: 8605065049433998287, guid: a28f7899f0f0192418a39511d059a564,
+    type: 3}
+  VideoEntityPrefab: {fileID: 5951935607714952382, guid: 046ddeba4c296b54eae1249fd11569a8,
+    type: 3}
+  VideoPrefab: {fileID: 186133455, guid: 277672d91bafee445a2389918113edfb, type: 3}
+  streamIPadPrefab: {fileID: 1823101722055151495, guid: d833544d6bafe4c4d951d44eac6f955d,
+    type: 3}
+  streamHMDPrefab: {fileID: 7225811414517729481, guid: 28e65730d29aaca4eb505c5d5d8a0c1a,
+    type: 3}
+  ARVRTarget: {fileID: 5012034031025564095, guid: 4ee638adbf3d10f4883ba607b911a06e,
+    type: 3}
+  DefaultEventPrefab: {fileID: 8867339062054004161, guid: f447e529813cdcb42b070d50d25f5f52,
+    type: 3}
+  PlaybackSession: {fileID: 0}

@@ -1,0 +1,42 @@
+.container {
+    margin: auto;
+    display: flex;
+    width: 1200px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.button-primary{
+    height: 35px;
+    width: 120px;
+    text-align: center;
+    font-weight: bold;
+    color: #484f4f;
+    cursor: pointer;
+    background-color: rgb(93, 255, 120);
+    border-radius: 3px;
+}
+
+.u-full-width {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+}
+
+.u-full-width th, .u-full-width td {
+    text-align: left;
+    padding: 12px;
+}
+
+.u-full-width tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.active {
+    color: green;
+}

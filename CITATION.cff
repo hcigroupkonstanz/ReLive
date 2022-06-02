@@ -1,0 +1,86 @@
+cff-version: 1.2.0
+title: "ReLive: Bridging In-Situ and Ex-Situ Visual Analytics for Analyzing Mixed Reality User Studies"
+message: Please cite this software using these metadata.
+type: software
+authors:
+  - given-names: Sebastian
+    family-names: Hubenschmid
+    email: Sebastian.Hubenschmid@uni-konstanz.de
+    affiliation: 'HCI Group, University of Konstanz'
+    orcid: 'https://orcid.org/0000-0002-8704-8503'
+  - given-names: Jonathan
+    family-names: Wieland
+    email: Jonathan.Wieland@uni-konstanz.de
+    affiliation: 'HCI Group, University of Konstanz'
+    orcid: 'https://orcid.org/0000-0003-2555-6868'
+  - given-names: Daniel Immanuel
+    family-names: Fink
+    email: Daniel.Immanuel.Fink@uni-konstanz.de
+    affiliation: 'HCI Group, University of Konstanz'
+    orcid: 'https://orcid.org/0000-0003-4281-972X'
+  - given-names: Andrea
+    family-names: Batch
+    email: ajulca@umd.edu
+    affiliation: 'University of Maryland, College Park'
+  - given-names: Johannes
+    family-names: Zagermann
+    email: Johannes.Zagermann@uni-konstanz.de
+    affiliation: 'HCI Group, University of Konstanz'
+    orcid: 'https://orcid.org/0000-0002-6757-9753'
+  - given-names: Niklas
+    family-names: Elmqvist
+    email: elm@umd.edu
+    affiliation: 'University of Maryland, College Park'
+    orcid: 'https://orcid.org/0000-0001-5805-5301'
+  - given-names: Harald
+    family-names: Reiterer
+    email: Harald.Reiterer@uni-konstanz.de
+    affiliation: 'HCI Group, University of Konstanz'
+    orcid: 'https://orcid.org/0000-0001-8528-8928'
+preferred-citation:
+  type: conference-paper
+  authors:
+  - given-names: Sebastian
+    family-names: Hubenschmid
+    email: Sebastian.Hubenschmid@uni-konstanz.de
+    affiliation: 'HCI Group, University of Konstanz'
+    orcid: 'https://orcid.org/0000-0002-8704-8503'
+  - given-names: Jonathan
+    family-names: Wieland
+    email: Jonathan.Wieland@uni-konstanz.de
+    affiliation: 'HCI Group, University of Konstanz'
+    orcid: 'https://orcid.org/0000-0003-2555-6868'
+  - given-names: Daniel Immanuel
+    family-names: Fink
+    email: Daniel.Immanuel.Fink@uni-konstanz.de
+    affiliation: 'HCI Group, University of Konstanz'
+    orcid: 'https://orcid.org/0000-0003-4281-972X'
+  - given-names: Andrea
+    family-names: Batch
+    email: ajulca@umd.edu
+    affiliation: 'University of Maryland, College Park'
+  - given-names: Johannes
+    family-names: Zagermann
+    email: Johannes.Zagermann@uni-konstanz.de
+    affiliation: 'HCI Group, University of Konstanz'
+    orcid: 'https://orcid.org/0000-0002-6757-9753'
+  - given-names: Niklas
+    family-names: Elmqvist
+    email: elm@umd.edu
+    affiliation: 'University of Maryland, College Park'
+    orcid: 'https://orcid.org/0000-0001-5805-5301'
+  - given-names: Harald
+    family-names: Reiterer
+    email: Harald.Reiterer@uni-konstanz.de
+    affiliation: 'HCI Group, University of Konstanz'
+    orcid: 'https://orcid.org/0000-0001-8528-8928'
+  doi: "10.1145/3491102.3517550"
+  title: "ReLive: Bridging In-Situ and Ex-Situ Visual Analytics for Analyzing Mixed Reality User Studies"
+  year: 2022
+  address: "New York, NY, USA"
+  booktitle: "Proceedings of the 2022 CHI Conference on Human Factors in Computing Systems"
+  location: "New Orleans, LA, USA"
+  series: "CHI '22"
+  numpages: 20
+  articleno: 24
+repository-code: 'https://github.com/hcigroupkonstanz/ReLive'

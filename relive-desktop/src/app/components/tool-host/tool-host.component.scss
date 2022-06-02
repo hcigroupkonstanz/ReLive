@@ -1,0 +1,158 @@
+@import "src/variables";
+
+.tool-container {
+    @include drop-indicator;
+
+    width: 100%;
+    padding: 20px 30px;
+
+    position: relative;
+    background: white;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    mat-icon {
+        @include noselect;
+        margin-right: 10px;
+    }
+
+    .expand-button {
+        margin-left: 10px;
+        font-size: 28px;
+        cursor: pointer;
+    }
+}
+
+.icon-button {
+    background: transparent;
+    box-shadow: inherit;
+}
+
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .actions {
+        * {
+            margin: 3px;
+            cursor: pointer;
+        }
+    }
+
+    .title {
+        font-size: 22px;
+        font-weight: bold;
+    }
+}
+
+.collapsible-container {
+    margin-top: 5px;
+
+    .subtitle {
+        font-size: 16px;
+        font-weight: bold;
+        color: #9FA2B4;
+    }
+}
+
+.list {
+    padding-top: 5px;
+    min-height: 50px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .title {
+        width: 100px;
+    }
+
+    app-chip {
+        padding: 5px 10px 5px 0px;
+    }
+
+    > .add-button {
+        background: none;
+        box-shadow: inherit;
+    }
+
+}
+
+.session-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .session-color {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        margin-left: 5px;
+        margin-right: 10px;
+    }
+}
+
+
+.parameter {
+    .chip-content {
+        display: flex;
+        flex-direction: row;
+        height: 24px;
+        align-items: center;
+    }
+
+    .name {
+        padding-right: 10px;
+    }
+
+    .value > input {
+        width: 70px;
+        text-align: center;
+        border: none;
+        border-bottom: 1px solid black;
+        transition: border $defaultTransition;
+
+        &:focus-visible {
+            outline: none;
+        }
+    }
+}
+
+
+.tool-content {
+    @include noselect;
+
+    position: relative;
+    min-height: 100px;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: $colMedia;
+    border: $borderMedia;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.loading-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(44, 44, 44, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 64px;
+}

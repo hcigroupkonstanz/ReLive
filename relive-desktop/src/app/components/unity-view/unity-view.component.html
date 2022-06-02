@@ -1,0 +1,111 @@
+
+<div class="rs-container" oncontextmenu="return false;"
+    [dndDropzone]
+    (dndDrop)="onDrop($event)"
+    dndDragoverClass="drag-over"
+    [dndAllowExternal]="true"
+    [ngClass]="{ 'drag-over-disabled': isDropDisabled() }">
+    <video #unityPlayer></video>
+
+    <div id="play-button" (click)="onClickPlayButton()" *ngIf="!isPlaying">
+        <mat-icon [inline]="true">play_arrow</mat-icon>
+    </div>
+
+    <div id="fullscreen-button" (click)="toggleFullscreen()" *ngIf="isPlaying" matTooltip="Toggle fullscreen">
+        <mat-icon [inline]="true" *ngIf="isFullscreen()">fullscreen_exit</mat-icon>
+        <mat-icon [inline]="true" *ngIf="!isFullscreen()">fullscreen</mat-icon>
+    </div>
+
+    <div class="drop-indicator">
+        <div>
+            <mat-icon [inline]="true" class="icon-droppable" svgIcon="plus"></mat-icon>
+            <mat-icon [inline]="true" class="icon-full" svgIcon="close"></mat-icon>
+        </div>
+    </div>
+
+    <div id="camera-views" *ngIf="isPlaying && [ 'FreeFly', 'VR', 'Isometric' ].indexOf(notebook.sceneView) >= 0">
+        <button mat-mini-fab class="button" [ngClass]="{ 'active': notebook.sceneView === 'FreeFly' }" (click)="setView('FreeFly')">
+            <mat-icon matTooltip="Free Fly Camera" svgIcon="perspective"></mat-icon>
+        </button>
+        <button mat-mini-fab class="button" [ngClass]="{ 'active': notebook.sceneView === 'Isometric' }" (click)="setView('Isometric')">
+            <mat-icon matTooltip="Isometric View" svgIcon="isometric"></mat-icon>
+        </button>
+        <button mat-mini-fab class="button" [ngClass]="{ 'active': notebook.sceneView === 'VR' }" (click)="setView('VR')">
+            <mat-icon matTooltip="VR View" svgIcon="vr"></mat-icon>
+        </button>
+    </div>
+
+    <div id="entity-camera-views" *ngIf="isPlaying && [ 'ViewEntity', 'FollowEntity' ].indexOf(notebook.sceneView) >= 0">
+        <app-chip (close)="setView('FreeFly')" style="margin-right: 10px;">{{ notebook.sceneViewOptions['follow-entity-name'] }}</app-chip>
+
+        <select *ngIf="getActiveSessions().length > 0" [(ngModel)]="notebook.sceneViewOptions['follow-entity-sessionId']" (change)="sessionSelectionChanged()">
+            <option *ngFor="let session of getActiveSessions()" [ngValue]="session.sessionId">{{ session.name }}</option>
+        </select>
+
+        <button mat-mini-fab class="button" [ngClass]="{ 'active': notebook.sceneView === 'ViewEntity' }" (click)="setView('ViewEntity')">
+            <mat-icon matTooltip="Entity View" svgIcon="video-on"></mat-icon>
+        </button>
+        <button mat-mini-fab class="button" [ngClass]="{ 'active': notebook.sceneView === 'FollowEntity' }" (click)="setView('FollowEntity')">
+            <mat-icon matTooltip="Follow Entity" svgIcon="focus"></mat-icon>
+        </button>
+    </div>
+
+    <div class="chip-list">
+        <app-chip *ngFor="let session of sessions | activeSessions" (close)="removeSession(session)" [color]="session.color">
+            {{ session.name }}
+        </app-chip>
+    </div>
+
+    <div id="info-panel" *ngIf="isPlaying">
+        <mat-icon>info</mat-icon>
+
+        <div id="tooltip">
+            <div *ngIf="notebook.sceneView === 'FreeFly'">
+                <div class="keybinding-entry">
+                    <div class="keybinding">Q</div> / <div class="keybinding">E</div>: Up / Down
+                </div>
+                <div class="keybinding-entry">
+                    <div class="keybinding">W</div> / <div class="keybinding">S</div>: Forward / Backward
+                </div>
+                <div class="keybinding-entry">
+                    <div class="keybinding">A</div> / <div class="keybinding">D</div>: Left / Right
+                </div>
+                <div class="keybinding-entry">
+                    <mat-icon svgIcon="mouse-right"></mat-icon>: Look around
+                </div>
+            </div>
+
+            <div *ngIf="notebook.sceneView === 'VR'">
+                No controls available
+            </div>
+
+            <div *ngIf="notebook.sceneView === 'ViewEntity'">
+                No controls available
+            </div>
+
+            <div *ngIf="notebook.sceneView === 'Isometric'">
+                <div class="keybinding-entry">
+                    <div class="keybinding">Q</div> / <div class="keybinding">E</div>: Zoom in/out
+                </div>
+                <div class="keybinding-entry">
+                    <div class="keybinding">W</div> / <div class="keybinding">S</div>: Up / Down
+                </div>
+                <div class="keybinding-entry">
+                    <div class="keybinding">A</div> / <div class="keybinding">D</div>: Left / Right
+                </div>
+                <div class="keybinding-entry">
+                    <mat-icon svgIcon="mouse-right"></mat-icon>: Rotate left/right
+                </div>
+            </div>
+
+            <div *ngIf="notebook.sceneView === 'FollowEntity'">
+                <div class="keybinding-entry">
+                    <mat-icon svgIcon="mouse-right"></mat-icon>: Rotate around entity
+                </div>
+                <div class="keybinding-entry">
+                    <mat-icon svgIcon="mouse-scroll"></mat-icon>: Zoom in/out
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

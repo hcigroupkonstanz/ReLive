@@ -1,0 +1,89 @@
+$colBackground: #E5E5E5;
+$colOutline: #DFE0EB;
+$borderOutline: 2px solid $colOutline;
+$colHighlight: #81A1C1;
+$colMedia: #FCFCFC;
+$borderMedia: 2px solid #DFE0EB; 
+$borderColor: #0D0606;
+$borderDefault: 1px solid $borderColor;
+$colActive: $colHighlight;
+
+$defaultTransition: 0.2s linear;
+
+@mixin noselect {
+    // see: https://stackoverflow.com/a/4407335/4090817
+    -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+@mixin outline {
+    border: 1px solid $colOutline;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+@mixin hoverhighlight {
+    transition: background-color $defaultTransition;
+
+    &:hover {
+        background-color: $colHighlight;
+    }
+}
+
+@mixin drop-indicator {
+    position: relative;
+
+    .drop-indicator {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        opacity: 0;
+        transition: opacity $defaultTransition;
+        background-color: #A3BE8C;
+        pointer-events: none;
+
+        mat-icon {
+            height: 200px;
+        }
+
+        .icon-droppable {
+            display: inline-block;
+        }
+
+        .icon-full {
+            display: none;
+        }
+    }
+
+    &.drag-over {
+        .drop-indicator {
+            opacity: 0.5;
+        }
+    }
+
+    &.drag-over-disabled {
+        .drop-indicator {
+            background-color: #BF616A;
+
+            .icon-droppable {
+                display: none;
+            }
+
+            .icon-full {
+                display: inline-block;
+            }
+        }
+    }
+}

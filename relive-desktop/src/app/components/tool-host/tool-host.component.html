@@ -1,0 +1,128 @@
+<div class="tool-container"
+    [dndDropzone]
+    (dndDrop)="onDrop($event)"
+    dndDragoverClass="drag-over"
+    [dndAllowExternal]="true"
+    [ngClass]="{ 'drag-over-disabled': isDropDisabled() }">
+
+    <div class="header">
+        <div class="title">
+            <mat-icon>{{ icon }}</mat-icon>
+            <span>{{ tool.name }}</span>
+
+            <div (click)="toggleToolExpansion()" class="expand-button">
+                <mat-icon [svgIcon]="tool.isExpanded ? 'expand-less' : 'expand-more'" [matTooltip]="tool.isExpanded ? 'Hide cell' : 'Show cell'"></mat-icon>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button mat-mini-fab class="icon-button" (click)="moveUp()">
+                <mat-icon matTooltip="Move cell up" svgIcon="expand-less"></mat-icon>
+            </button>
+            <button mat-mini-fab class="icon-button" (click)="moveDown()">
+                <mat-icon matTooltip="Move cell down" svgIcon="expand-more"></mat-icon>
+            </button>
+            <button mat-mini-fab class="icon-button" (click)="exportData()">
+                <mat-icon matTooltip="Export raw data" svgIcon="export"></mat-icon>
+            </button>
+            <button mat-mini-fab class="icon-button" (click)="duplicateTool()" *ngIf="tool.type !== 'camera'">
+                <mat-icon matTooltip="Duplicate tool" svgIcon="duplicate"></mat-icon>
+            </button>
+            <button mat-mini-fab class="icon-button" (click)="toggleVisibility()" *ngIf="tool.type !== 'camera'">
+                <mat-icon matTooltip="Toggle visualization visibility in scene" [svgIcon]="tool.renderVisualization ? 'show-on' : 'show-off'"></mat-icon>
+            </button>
+            <button mat-mini-fab class="icon-button" (click)="removeTool()">
+                <mat-icon matTooltip="Remove cell" svgIcon="delete"></mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="tool.isExpanded && tool.type !== 'camera'">
+        <div class="list" *ngIf="tool.maxEntities > 0">
+            <div class="title">Entities</div>
+            <app-chip *ngFor="let entity of tool.entities" icon="user" (close)="removeEntity(entity)">
+                {{ entity?.name }}
+            </app-chip>
+            <button mat-mini-fab class="add-button" [matMenuTriggerFor]="entityMenu" *ngIf="tool.entities.length < tool.maxEntities">
+                <mat-icon svgIcon="plus"></mat-icon>
+            </button>
+
+            <mat-menu #entityMenu="matMenu">
+                <ng-container *ngFor="let entity of entities">
+                    <button mat-menu-item (click)="addEntity(entity)" *ngIf="!hasEntity(entity)">
+                        {{ entity.name }}
+                    </button>
+                </ng-container>
+            </mat-menu>
+        </div>
+
+        <div class="list" *ngIf="tool.maxEvents > 0">
+            <div class="title">Events</div>
+            <app-chip *ngFor="let event of tool.events" icon="task" (close)="removeEvent(event)">
+                {{ event?.name }}
+            </app-chip>
+            <button mat-mini-fab class="add-button" [matMenuTriggerFor]="eventMenu" *ngIf="tool.events.length < tool.maxEvents">
+                <mat-icon svgIcon="plus"></mat-icon>
+            </button>
+
+            <mat-menu #eventMenu="matMenu">
+                <ng-container *ngFor="let event of events">
+                    <button mat-menu-item (click)="addEvent(event)" *ngIf="!hasEvent(event)">
+                        {{ event.name }}
+                    </button>
+                </ng-container>
+            </mat-menu>
+        </div>
+
+        <div class="list">
+            <div class="title">Sessions</div>
+            <app-chip *ngFor="let instance of tool.instances" (close)="removeInstance(instance)" [color]="instance.color" (colorChange)="changeColor($event, instance)">
+                {{ instance.session.name }}
+            </app-chip>
+            <button mat-mini-fab class="add-button" [matMenuTriggerFor]="sessionMenu" *ngIf="tool.instances.length < sessions.length">
+                <mat-icon svgIcon="plus"></mat-icon>
+            </button>
+
+            <mat-menu #sessionMenu="matMenu">
+                <ng-container *ngFor="let session of sessions">
+                    <button mat-menu-item (click)="addSession(session, true)" class="session-button" *ngIf="!hasSession(session)">
+                        <div class="session-color" [ngStyle]="{ background: session.color }"></div>
+                        {{ session.name }}
+                    </button>
+                </ng-container>
+            </mat-menu>
+        </div>
+
+    </div>
+
+    <div class="list" *ngIf="tool.isExpanded && hasProperties">
+        <div class="title">Properties</div>
+
+        <app-chip class="parameter" *ngFor="let item of tool.parameters | keyvalue">
+            <div class="chip-content">
+                <div class="name">{{ item.value.name }}</div>
+                <div class="value" *ngIf="item.value.type === 'number' || item.value.type === 'dropdown'">
+                    <input type="number" [(ngModel)]="item.value.value" (ngModelChange)="onParameterChanged()">
+                </div>
+                <div class="value" *ngIf="item.value.type === 'bool'">
+                    <mat-checkbox color="primary" [(ngModel)]="item.value.value" (ngModelChange)="onParameterChanged()"></mat-checkbox>
+                </div>
+            </div>
+        </app-chip>
+    </div>
+
+    <div class="tool-content" *ngIf="tool.isExpanded">
+        <div *ngIf="tool.isLoading" class="loading-container">
+            Calculating...
+        </div>
+
+        <ng-template toolHost></ng-template>
+    </div>
+
+    <div class="drop-indicator">
+        <div>
+            <mat-icon [inline]="true" class="icon-droppable" svgIcon="plus"></mat-icon>
+            <mat-icon [inline]="true" class="icon-full" svgIcon="close"></mat-icon>
+        </div>
+    </div>
+</div>

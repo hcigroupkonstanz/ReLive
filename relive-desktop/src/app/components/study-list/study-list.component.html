@@ -1,0 +1,21 @@
+<div class="container">
+  <p style="margin-top: 5px; font-weight:bolder;">Relive</p>
+  <table class="u-full-width">
+      <tbody>
+        <tr class="header">
+          <th style="width:75%;">Study</th>
+          <th style="width:15%;">Summary</th>
+          <th style="width:10%;"></th>
+        </tr>
+        <tr *ngFor="let study of studies">
+              <td>{{ study.name }} <span *ngIf="study.isActive" class="active">(Active)</span></td>
+              <!-- TODO: currently broken again due to new sync -->
+              <td>{{ study.sessions?.length }} Sessions</td>
+              <td>
+                  <button *ngIf="!study.isLoading" class="button-primary" routerLink="/studies/{{study.name}}/">View Study</button>
+                  <div *ngIf="study.isLoading">Loading...</div>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>

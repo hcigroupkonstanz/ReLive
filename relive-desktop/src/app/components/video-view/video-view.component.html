@@ -1,0 +1,20 @@
+<div class="video-container"
+    [dndDropzone]
+    (dndDrop)="onDrop($event)"
+    dndDragoverClass="drag-over"
+    [dndAllowExternal]="true"
+    [ngClass]="{ 'drag-over-disabled': isDropDisabled() }">
+
+    <ng-container *ngFor="let video of videos">
+        <app-video-attachment class="video"
+            *ngIf="video.session.showVideos"
+            [source]="video.source" [session]="video.session" [origin]="video.origin" [attachment]="video.attachment"></app-video-attachment>
+    </ng-container>
+
+    <div class="drop-indicator">
+        <div>
+            <mat-icon [inline]="true" class="icon-droppable" svgIcon="plus"></mat-icon>
+            <mat-icon [inline]="true" class="icon-full" svgIcon="close"></mat-icon>
+        </div>
+    </div>
+</div>

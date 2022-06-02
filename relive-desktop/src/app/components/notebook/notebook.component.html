@@ -1,0 +1,125 @@
+<div id="container" [ngStyle]="style">
+    <div id="session-panel" class="panel">
+        <ng-scrollbar>
+
+            <div id="study-title">
+                <span>{{ study.displayName || study.name }}</span>
+            </div>
+
+            <div class="section">
+                <div class="header">Sessions</div>
+
+                <div class="list">
+                    <div class="list-item grabbable" *ngFor="let session of study.sessions" [ngClass]="{ active: session.isActive }">
+                        <div [dndDraggable]="session.sessionId" dndType="session" (dndStart)="onDragStart('session', session.sessionId)">
+                            <div class="session-color" [ngStyle]="{ background: session.color }"></div>
+                            <span>{{ session.name }}</span>
+
+                            <mat-icon svgIcon="show-on" class="scene-indicator"></mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="header">Session Tags</div>
+
+                <div class="list">
+                    <div class="list-item grabbable" *ngFor="let tag of study.tags">
+                        <div [dndDraggable]="tag" dndType="tag" (dndStart)="onDragStart('tag', tag)">
+                            <mat-icon svgIcon="tag"></mat-icon>
+                            <span class="text">{{ tag }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="section">
+                <div class="header">Shared Entities</div>
+
+                <div class="list">
+                    <div class="list-item grabbable" *ngFor="let entity of study.sharedEntities">
+                        <div [dndDraggable]="entity.name" dndType="entity" (dndStart)="onDragStart('entity', entity.name)">
+                            <mat-icon *ngIf="entity.entities[0].entityType === 'object'">view_in_ar</mat-icon>
+                            <mat-icon *ngIf="entity.entities[0].entityType === 'camera'">videocam</mat-icon>
+                            <mat-icon *ngIf="entity.entities[0].entityType === 'zero'">trip_origin</mat-icon>
+                            <span class="text">{{ entity.name }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" *ngIf="study.sharedEvents?.length > 0">
+                <div class="header">
+                    <span>Shared Events</span>
+                </div>
+
+                <div class="list">
+                    <div class="list-item grabbable" *ngFor="let event of study.sharedEvents">
+                        <div [dndDraggable]="event.name" dndType="event" (dndStart)="onDragStart('event', event.name)">
+                            <mat-icon *ngIf="event.events[0].eventType === 'log'">notes</mat-icon>
+                            <mat-icon *ngIf="event.events[0].eventType === 'task'" svgIcon="task"></mat-icon>
+                            <span class="text">{{ event.name }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-scrollbar>
+    </div>
+
+
+
+    <div id="tool-panel" class="panel">
+        <div class="header-bar">
+            <div class="header">{{ reliveService.notebook.name }}</div>
+
+            <div class="buttons">
+                <button mat-mini-fab class="icon-button" (click)="clearTools()">
+                    <mat-icon matTooltip="Remove all cells" svgIcon="close"></mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <hr/>
+
+
+        <ng-scrollbar>
+            <div class="tool-container">
+                <app-add-tool [index]="0"></app-add-tool>
+
+                <!-- List of all tools -->
+                <div *ngFor="let tool of tools; let i = index">
+                    <div class="tool">
+                        <app-tool-host [tool]="tool"></app-tool-host>
+                    </div>
+
+                    <app-add-tool [index]="i + 1"></app-add-tool>
+                </div>
+            </div>
+
+        </ng-scrollbar>
+    </div>
+
+
+
+
+    <div id="media-panel" class="panel">
+
+        <h2>Videos</h2>
+        <ng-scrollbar>
+            <app-video-view></app-video-view>
+        </ng-scrollbar>
+
+        <h2>Scene</h2>
+        <app-unity-view></app-unity-view>
+    </div>
+
+    <div id="timeline-drag-handle" (mousedown)="startTimelineDrag($event)">
+        <div id="handle"></div>
+    </div>
+
+    <div id="timeline-container" class="panel">
+        <app-timeline></app-timeline>
+    </div>
+</div>

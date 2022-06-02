@@ -1,0 +1,21 @@
+@import "src/variables";
+
+.video-container {
+    @include drop-indicator;
+
+    min-height: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-right: 15px;
+}
+
+.video {
+    @include outline;
+    background: $colBackground;
+    width: 48%;
+    margin-bottom: 16px;
+}
+

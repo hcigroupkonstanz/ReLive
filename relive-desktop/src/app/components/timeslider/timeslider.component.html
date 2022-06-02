@@ -1,0 +1,213 @@
+<div class="timeslider-container"
+    [ngClass]="{ 'inactive': !this.session.isActive }"
+    [ngStyle]="getSessionStyle()"
+    #timesliderContainer
+    (dragstart)="onDragStart($event)">
+
+    <!-- TODO: meant for dragging timeslider around -->
+    <!-- <div class="timeslider-header small">
+    </div> -->
+
+    <div #entityTooltip class="tooltip">
+        <table>
+            <colgroup>
+                <col span="1">
+                <col span="1">
+            </colgroup>
+
+            <tr>
+                <td class="description">Entity ID</td>
+                <td class="data">{{ mouseOverEntity?.entityId }}</td>
+            </tr>
+            <tr *ngIf="mouseOverEntity?.name">
+                <td class="description">Name</td>
+                <td class="data">{{ mouseOverEntity?.name }}</td>
+            </tr>
+            <tr *ngIf="mouseOverEntity?.isVisible !== undefined">
+                <td class="description">Visibility in Scene</td>
+                <td class="data">{{ mouseOverEntity?.isVisible ? 'Visible' : 'Hidden' }}</td>
+            </tr>
+            <tr *ngIf="mouseOverEntity?.space">
+                <td class="description">Space</td>
+                <td class="data">{{ mouseOverEntity?.space }}</td>
+            </tr>
+            <tr>
+                <td class="description">Active - Start</td>
+                <td class="data">{{ mouseOverEntity?.timeStart - session.startTime | date : 'mm:ss' }}</td>
+            </tr>
+            <tr>
+                <td class="description">Active - End</td>
+                <td class="data">{{ mouseOverEntity?.timeEnd - session.startTime | date : 'mm:ss' }}</td>
+            </tr>
+            <tr>
+                <td class="description">Active - Duration</td>
+                <td class="data">{{ mouseOverEntity?.timeEnd - mouseOverEntity?.timeStart | date : 'mm:ss' }}</td>
+            </tr>
+
+            <tr *ngIf="mouseOverEntity">
+                <td class="description">Entity Type</td>
+                <td class="data"><app-chip [color]="getEntityColor(mouseOverEntity?.entityType)">{{ mouseOverEntity?.entityType }}</app-chip></td>
+            </tr>
+        </table>
+    </div>
+
+    <div #eventTooltip class="tooltip">
+        <table>
+            <colgroup>
+                <col span="1">
+                <col span="1">
+            </colgroup>
+
+            <tr>
+                <td class="description">Event ID</td>
+                <td class="data">{{ mouseOverEvent?.eventId }}</td>
+            </tr>
+            <tr *ngIf="mouseOverEvent?.name">
+                <td class="description">Name</td>
+                <td class="data">{{ mouseOverEvent?.name }}</td>
+            </tr>
+            <tr>
+                <td class="description">Start</td>
+                <td class="data">{{ mouseOverEvent?.timestamp - session.startTime | date : 'mm:ss' }}</td>
+            </tr>
+            <tr *ngIf="mouseOverEvent?.endTimestamp">
+                <td class="description">End</td>
+                <td class="data">{{ mouseOverEvent?.endTimestamp - session.startTime | date : 'mm:ss' }}</td>
+            </tr>
+            <tr *ngIf="mouseOverEvent?.endTimestamp">
+                <td class="description">Duration</td>
+                <td class="data">{{ mouseOverEvent?.endTimestamp - mouseOverEvent?.timestamp | date : 'mm:ss' }}</td>
+            </tr>
+
+            <tr *ngIf="mouseOverEvent">
+                <td class="description">Event Type</td>
+                <td class="data"><app-chip [color]="getEventColor(mouseOverEvent?.eventType)">{{ mouseOverEvent?.eventType }}</app-chip></td>
+            </tr>
+
+            <tr *ngIf="mouseOverEvent?.entityIds">
+                <td class="description">Related Entities</td>
+                <td class="data">
+                    <app-chip *ngFor="let entityId of mouseOverEvent.entityIds" style="color: black;">{{ getEntityName(entityId) }}</app-chip>
+                </td>
+            </tr>
+
+            <tr *ngIf="mouseOverEvent?.message">
+                <td class="description">Message</td>
+                <td class="data">
+                    <code><pre>{{ mouseOverEvent.message }}</pre></code>
+                </td>
+            </tr>
+
+            <tr *ngIf="mouseOverEvent?.logMessage">
+                <td class="description">Log Message</td>
+                <td class="data">
+                    <code><pre>{{ mouseOverEvent.logMessage }}</pre></code>
+                </td>
+            </tr>
+
+            <tr *ngIf="mouseOverEvent?.logType">
+                <td class="description">Log Type</td>
+                <td class="data"><app-chip>{{ mouseOverEvent?.logType }}</app-chip></td>
+            </tr>
+        </table>
+    </div>
+
+    <div #videoTooltip class="tooltip">
+        <table>
+            <colgroup>
+                <col span="1">
+                <col span="1">
+            </colgroup>
+
+            <tr>
+                <td class="description">Video ID</td>
+                <td class="data">{{ mouseOverVideo?.name }}</td>
+            </tr>
+            <tr>
+                <td class="description">Start</td>
+                <td class="data">{{ mouseOverVideo?.timeStart - session.startTime | date : 'mm:ss' }}</td>
+            </tr>
+            <tr>
+                <td class="description">Active - End</td>
+                <td class="data">{{ mouseOverEntity?.timeEnd - session.startTime | date : 'mm:ss' }}</td>
+            </tr>
+            <tr>
+                <td class="description">Active - Duration</td>
+                <td class="data">{{ mouseOverEntity?.timeEnd - mouseOverEntity?.timeStart | date : 'mm:ss' }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="timeslider-header" [ngClass]="{ expanded: session.isEntitiesExpanded }">
+        <span>Entities</span>
+        <mat-icon
+            (click)="toggleEntityExpansion()"
+            [svgIcon]="session.isEntitiesExpanded ? 'expand-less' : 'expand-more'"
+            [matTooltip]="session.isEntitiesExpanded ? 'Collapse' : 'Expand'"></mat-icon>
+    </div>
+    <div class="timeslider-details"
+        #timesliderEntities
+        [ngClass]="{ active: session.isEntitiesExpanded }">
+        <!-- SVG goes here -->
+    </div>
+
+
+    <div class="timeslider-header" [ngClass]="{ expanded: session.isEventsExpanded }">
+        <span>Events</span>
+        <div>
+            <mat-menu #filterMenu="matMenu">
+                <button mat-menu-item (click)="toggleFilter($event, 'click')">
+                    <mat-icon [svgIcon]="session.eventFilters['click'] ? 'show-on' : 'show-off'"></mat-icon>
+                    <span>Interaction Events</span>
+                </button>
+                <button mat-menu-item (click)="toggleFilter($event, 'voice')">
+                    <mat-icon [svgIcon]="session.eventFilters['voice'] ? 'show-on' : 'show-off'"></mat-icon>
+                    <span>Voice Events</span>
+                </button>
+                <button mat-menu-item (click)="toggleFilter($event, 'task')">
+                    <mat-icon [svgIcon]="session.eventFilters['task'] ? 'show-on' : 'show-off'"></mat-icon>
+                    <span>Task Events</span>
+                </button>
+                <button mat-menu-item (click)="toggleFilter($event, 'log')">
+                    <mat-icon [svgIcon]="session.eventFilters['log'] ? 'show-on' : 'show-off'"></mat-icon>
+                    <span>Log Events</span>
+                </button>
+                <button mat-menu-item (click)="toggleFilter($event, 'cubes')">
+                    <mat-icon [svgIcon]="session.eventFilters['cubes'] ? 'show-on' : 'show-off'"></mat-icon>
+                    <span>Cube Events</span>
+                </button>
+                <button mat-menu-item (click)="toggleFilter($event, 'screenshot')">
+                    <mat-icon [svgIcon]="session.eventFilters['screenshot'] ? 'show-on' : 'show-off'"></mat-icon>
+                    <span>Screenshots</span>
+                </button>
+            </mat-menu>
+
+            <mat-icon svgIcon="filter" matTooltip="Filter options" [matMenuTriggerFor]="filterMenu"></mat-icon>
+            <mat-icon
+                (click)="toggleEventsExpansion()"
+                [svgIcon]="session.isEventsExpanded ? 'expand-less' : 'expand-more'"
+                [matTooltip]="session.isEventsExpanded ? 'Collapse' : 'Expand'"></mat-icon>
+        </div>
+    </div>
+    <div class="timeslider-details"
+        #timesliderEvents
+        [ngClass]="{ active: session.isEventsExpanded }">
+        <!-- SVG goes here -->
+    </div>
+
+
+    <div class="timeslider-header" [ngClass]="{ expanded: session.isVideoExpanded }">
+        <span>Videos</span>
+        <mat-icon
+            (click)="toggleVideoExpansion()"
+            [svgIcon]="session.isVideoExpanded ? 'expand-less' : 'expand-more'"
+            [matTooltip]="session.isVideoExpanded ? 'Collapse' : 'Expand'"></mat-icon>
+    </div>
+    <div class="timeslider-details"
+        #timesliderVideos
+        [ngClass]="{ active: session.isVideoExpanded }">
+        <!-- SVG goes here -->
+    </div>
+
+    <img #dragImage id="dragImage">
+</div>

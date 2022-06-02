@@ -1,0 +1,62 @@
+<div class="container"
+    [ngClass]="{ 'container-inactive': !isChoosingType }"
+    (click)="openToolSelection()"
+    [dndDropzone]
+    (dndDrop)="onDrop($event)"
+    [dndAllowExternal]="true"
+    dndDragoverClass="drag-over"
+    #container>
+    <div *ngIf="!isChoosingType">
+        <mat-icon svgIcon="plus"></mat-icon>
+    </div>
+
+    <div class="button-container" *ngIf="isChoosingType">
+        <button (click)="addDistanceTool()" matTooltip="Measures the distance between two entities" [disabled]="dragType === 'event' || dragType === 'session-event'">
+            <span>Distance Tool</span>
+            <div>
+                <mat-icon [inline]="true">square_foot</mat-icon>
+            </div>
+        </button>
+        <button (click)="addPropertyTool()" matTooltip="Shows specific properties of an entity" [disabled]="dragType === 'event' || dragType === 'session-event'">
+            <span>Property Tool</span>
+            <div>
+                <mat-icon [inline]="true">search</mat-icon>
+            </div>
+        </button>
+        <button (click)="addAngleTool()" matTooltip="Calculates the angle between two entities" [disabled]="dragType === 'event' || dragType === 'session-event'">
+            <span>Angle Tool</span>
+            <div>
+                <mat-icon [inline]="true">text_rotation_angleup</mat-icon>
+            </div>
+        </button>
+        <button (click)="addTrailTool()" matTooltip="Shows a trail visualization of an entity's position" [disabled]="dragType === 'event' || dragType === 'session-event'">
+            <span>Trail Visualizer</span>
+            <div>
+                <mat-icon [inline]="true">gesture</mat-icon>
+            </div>
+        </button>
+        <button (click)="addFrustumTool()" matTooltip="Shows the view frustum of an entity" [disabled]="dragType === 'event' || dragType === 'session-event'">
+            <span>Frustum Visualizer</span>
+            <div>
+                <mat-icon [inline]="true">change_history</mat-icon>
+            </div>
+        </button>
+        <button (click)="addEventTimer()" matTooltip="Measure the time between two events" [disabled]="dragType === 'entity' || dragType === 'session-entity'">
+            <span>Event Timer</span>
+            <div>
+                <mat-icon [inline]="true">timer</mat-icon>
+            </div>
+        </button>
+        <div [matTooltip]="hasCameraTool() ? 'You can only add one camera tool' : 'Camera tool for taking screenshots'">
+            <button (click)="addCameraTool()" [disabled]="hasCameraTool()">
+                <span>Camera</span>
+                <div>
+                    <mat-icon [inline]="true">photo_camera</mat-icon>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <div class="drop-indicator">
+    </div>
+</div>

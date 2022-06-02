@@ -1,0 +1,170 @@
+@import "src/variables";
+
+#dragImage {
+    visibility: none;
+    position: absolute;
+}
+
+.tooltip {
+    position: absolute;
+    visibility: hidden;
+    padding: 20px;
+
+    background: #222A;
+    z-index: 999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    .description {
+        padding-right: 10px;
+        color: #CCC;
+        text-align: right;
+    }
+
+    .data {
+        vertical-align: top;
+        font-weight: 500;
+        color: white;
+        max-width: 300px;
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word
+        }
+
+        app-chip {
+            display: inline-block;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+    }
+}
+
+.timeslider-header {
+    @include noselect;
+
+    background: #2d92eb;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 1px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0px 10px;
+
+    &.expanded {
+        font-weight: 600;
+    }
+
+    mat-icon {
+        cursor: pointer;
+    }
+
+    &.small {
+        height: 10px;
+        cursor: grab;
+        background: $colHighlight !important;
+    }
+}
+
+.timeslider-details {
+    @include noselect;
+
+    display: relative;
+    background: #2d92eb22;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    display: none;
+    &.active {
+        display: block;
+    }
+
+    .timeslider-entity, .timeslider-video {
+        background: #409beb;
+        position: absolute;
+        border: 1px solid transparent;
+        border-width: 1px;
+        border-color: transparent;
+        opacity: 0.8;
+        color: black;
+
+        &:hover {
+            border: 1px solid black;
+            opacity: 0.8;
+        }
+
+        &.inactive {
+            background: #a8a8a8;
+        }
+    }
+
+    .single-event {
+        position: absolute;
+        opacity: 0.8;
+        border: 1px solid black;
+        transform: rotate(45deg);
+
+        &:hover {
+            opacity: 1;
+            border: 2px solid black;
+        }
+    }
+
+    .interval-event {
+        opacity: 0.8;
+
+        .node {
+            border: 1px solid black;
+            position: absolute;
+            transform: rotate(45deg);
+        }
+
+        .line {
+            position: absolute;
+            background: black;
+        }
+
+        &:hover {
+            opacity: 1;
+
+            .node {
+                border: 2px solid black;
+            }
+
+            .line {
+                border: 2px solid black;
+            }
+        }
+    }
+
+    .timeslider-entity-text, .timeslider-video-text {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+}
+
+.timeslider-container {
+    position: relative;
+}
+
+.timeslider-container.inactive {
+    .timeslider-header {
+        background: #8d9aa5;
+    }
+
+    .timeslider-details {
+        background: #8d9aa522;
+
+        .timeslider-entity, .timeslider-video {
+            background: #a8a8a8;
+        }
+    }
+}

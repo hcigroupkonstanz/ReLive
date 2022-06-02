@@ -1,0 +1,46 @@
+@import "src/variables";
+
+.chip {
+    @include noselect;
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-style: solid;
+    border-color: $borderColor;
+    border-width: 2px;
+    width: fit-content;
+    padding: 3px;
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    .chip-icon {
+        margin-right: 5px;
+    }
+
+    .close-icon {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+    .content {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    #colorInput {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+
+        background: transparent;
+        border: none;
+        pointer-events: none;
+    }
+}

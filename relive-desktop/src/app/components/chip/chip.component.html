@@ -1,0 +1,9 @@
+<div class="chip" [ngStyle]="chipStyle" (click)="openColorInput()" [style.background]="color || 'white'" [style.border-color]="color || 'black'">
+    <mat-icon *ngIf="icon" [svgIcon]="icon" class="chip-icon"></mat-icon>
+    <span class="content">
+        <ng-content></ng-content>
+    </span>
+    <mat-icon *ngIf="close.observers.length > 0" [svgIcon]="color ? 'close_nocolor' : 'close'" class="close-icon" (click)="sendClose()"></mat-icon>
+
+    <input #colorInput type="color" id="colorInput" [(ngModel)]="color" (ngModelChange)="onColorChange()">
+</div>

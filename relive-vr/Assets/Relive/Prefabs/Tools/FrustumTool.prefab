@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8364987776604691172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8364987776604691174}
+  - component: {fileID: 8364987776604691173}
+  m_Layer: 0
+  m_Name: FrustumTool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8364987776604691174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8364987776604691172}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.1388025, y: -0.41732287, z: 3.7676885}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8364987776604691173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8364987776604691172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6faeca6b6e7e8a54ba4f3d1280dd2b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 7a174902-f57f-4dd0-8177-a6834e06b936
+  Name: Frustum Visualizer
+  MinEntities: 1
+  MaxEntities: 1
+  MinEvents: 0
+  MaxEvents: 0
+  Image: {fileID: 21300000, guid: a66166efcbf3ae447a3b20386660bf1e, type: 3}
+  Properties: 1 Entity
+  RenderVisualization: 1
+  Singleton: 0
+  NotebookIndex: 0
+  HorizontalFOV: 110
+  HorizontalResolution: 2880
+  VerticalResolution: 1600
+  Zoom: 1
+  FrustumDistance: 20

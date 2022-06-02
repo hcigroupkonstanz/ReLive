@@ -1,0 +1,80 @@
+<div class="container" #container>
+    <table class="timeline-container" #timelineContainer>
+        <colgroup>
+            <col span="1" style="width: 400px">
+            <col span="1">
+        </colgroup>
+
+        <tr>
+            <th class="controls-container">
+                <button mat-flat-button id="play-button" class="button" (click)="togglePlayback()" [matTooltip]="notebook.isPaused ? 'Resume scene playback' : 'Pause scene playback'">
+                    <mat-icon *ngIf="notebook.isPaused" [inline]="true">play_arrow</mat-icon>
+                    <mat-icon *ngIf="!notebook.isPaused" [inline]="true">pause</mat-icon>
+                </button>
+
+                <button mat-flat-button class="button" [matMenuTriggerFor]="speedMenu" matTooltip="Scene playback speed">
+                    {{ notebook.playbackSpeed }}x
+                </button>
+
+                <button mat-flat-button class="button small" (click)="skipBackward()" matTooltip="Frame step backward">
+                    <mat-icon [inline]="true">skip_previous</mat-icon>
+                </button>
+
+                <button mat-flat-button class="button small" (click)="skipForward()" matTooltip="Frame stop forward">
+                    <mat-icon [inline]="true">skip_next</mat-icon>
+                </button>
+
+                <mat-menu #speedMenu="matMenu">
+                    <div style="font-weight: 500; padding: 0 10px; font-size: 16px;">Playback Speed</div>
+                    <hr/>
+                    <button mat-menu-item (click)="setPlaybackSpeed(0.5)">
+                        <span>0.5x</span>
+                    </button>
+                    <button mat-menu-item (click)="setPlaybackSpeed(1)">
+                        <span>1x</span>
+                    </button>
+                    <button mat-menu-item (click)="setPlaybackSpeed(2)">
+                        <span>2x</span>
+                    </button>
+                </mat-menu>
+            </th>
+
+            <th class="timeline-header">
+                <div class="timeline" #timeline (mousedown)="onTimelineMouseDown($event)">
+                    <!-- SVG goes here -->
+                </div>
+            </th>
+        </tr>
+    </table>
+
+    <ng-scrollbar>
+        <table class="timeline-container" #timelineContainer style="margin-bottom: 200px;">
+            <colgroup>
+                <col span="1" style="width: 400px">
+                <col span="1">
+            </colgroup>
+            <ng-container *ngFor="let session of sessions">
+                <tr>
+                    <td class="timeslider-text">
+                        <div class="session-name">
+                            <div class="session-color" [ngStyle]="{ background: session.color }"></div>
+                            <span>{{ session.name }}</span>
+                        </div>
+
+                        <div class="session-actions">
+                            <button mat-mini-fab (click)="toggleSession(session)">
+                                <mat-icon matTooltip="Toggle live playback" [svgIcon]="session.isActive ? 'show-on' : 'show-off'"></mat-icon>
+                            </button>
+                            <button mat-mini-fab (click)="toggleVideo(session)">
+                                <mat-icon matTooltip="Toggle video" [svgIcon]="session.showVideos ? 'video-on' : 'video-off'"></mat-icon>
+                            </button>
+                        </div>
+                    </td>
+                    <td class="timeslider-cell">
+                        <app-timeslider [session]="session" [scaleX]="scaleX"></app-timeslider>
+                    </td>
+                </tr>
+            </ng-container>
+        </table>
+    </ng-scrollbar>
+</div>

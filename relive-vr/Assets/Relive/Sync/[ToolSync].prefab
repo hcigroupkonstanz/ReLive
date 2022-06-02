@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4049042553933748576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7449934740421917279}
+  - component: {fileID: 8793052733829289638}
+  m_Layer: 0
+  m_Name: '[ToolSync]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7449934740421917279
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4049042553933748576}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8793052733829289638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4049042553933748576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3585c38f7d49e2f41be7b89e79580897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolPrefabs:
+  - Type: angle
+    Prefab: {fileID: 8330084000770233332, guid: 917d84160393b2a41b5b7ffc1d15ccf5,
+      type: 3}
+  - Type: frustum
+    Prefab: {fileID: 8364987776604691173, guid: 8b49c2eb7394c994abff19b4f06c965a,
+      type: 3}
+  - Type: distance
+    Prefab: {fileID: 2368098395446944688, guid: 93b6e5caab1ada34388804d1baeaf955,
+      type: 3}
+  - Type: property
+    Prefab: {fileID: 143464652326184889, guid: 7f8c9746d339762498c8c6414b651e00, type: 3}
+  - Type: trail
+    Prefab: {fileID: 4515064050000509350, guid: a1a7eebd15ada1644a2f4054f50b7c29,
+      type: 3}
+  - Type: camera
+    Prefab: {fileID: 2340166556167193168, guid: a4935165f805c4f42a287471dda0345b,
+      type: 3}
+  - Type: eventTimer
+    Prefab: {fileID: 7992727482130677039, guid: 66eee5dd325f8b04caa3d86fb90baad9,
+      type: 3}
